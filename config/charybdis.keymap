@@ -22,7 +22,6 @@
     tapping-term-ms = <170>;
 };
 
-
 / {
     macros {
         parentheses: parentheses {
@@ -112,6 +111,13 @@
                 <&macro_pause_for_release>;
 
             label = "WAIT_AFTER";
+        };
+
+        double_shift: double_key {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_SHIFT &kp LEFT_SHIFT>;
+            label = "DOUBLE_KEY";
         };
     };
 
@@ -230,7 +236,7 @@
             compatible = "zmk,behavior-tap-dance";
             label = "LANG";
             #binding-cells = <0>;
-            bindings = <&another_lang_on_hold 0 LC(SPACE)>, <&kp LA(LCTRL)>;
+            bindings = <&another_lang_on_hold 0 LC(SPACE)>, <&double_shift>;
         };
 
         shift_dance: shift_dance {
@@ -292,17 +298,6 @@
             >;
         };
 
-        SYMBOLS {
-            bindings = <
-&once_sym_on_hold LA(E) GRAVE  &trans    &trans  &trans    &kp LA(N8)  &trans         &trans        &trans       &trans        &trans                &trans                 &kp EQUAL
-&once_sym_on_hold LA(N) TILDE  &kp EXCL  &kp AT  &kp HASH  &kp DOLLAR  &kp PERCENT    &kp CARET     &kp AMPS     &kp ASTRK     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDER
-&kp LBKT                       &trans    &trans  &trans    &trans      &kp PIPE       &kp QUESTION  &trans       &trans        &trans                &trans                 &kp RBKT
-&kp SLASH                      &trans    &trans  &trans    &trans      &kp LT         &kp GT        &kp KP_PLUS  &kp KP_MINUS  &kp KP_MULTIPLY       &kp KP_DIVIDE          &kp BSLH
-                                                 &trans    &trans      &trans         &trans        &kp SPACE
-                                                           &trans      &trans         &trans
-            >;
-        };
-
         NAV_EDIT {
             bindings = <
 &trans  &trans     &trans     &trans     &trans     &trans       &trans                           &trans         &trans         &trans       &trans     &trans
@@ -311,6 +306,17 @@
 &trans  &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)  &kp LG(B)    &mt LG(BACKSPACE) LA(BACKSPACE)  &kp BACKSPACE  &kp INS        &kp LC(T)    &kp DEL    &mt LG(DEL) LA(DEL)
                               &trans     &trans     &trans       &trans                           &trans
                                          &trans     &trans       &trans
+            >;
+        };
+
+        SYMBOLS {
+            bindings = <
+&once_sym_on_hold LA(E) GRAVE  &trans    &trans  &trans    &kp LA(N8)  &trans         &trans        &trans       &trans        &trans                &trans                 &kp EQUAL
+&once_sym_on_hold LA(N) TILDE  &kp EXCL  &kp AT  &kp HASH  &kp DOLLAR  &kp PERCENT    &kp CARET     &kp AMPS     &kp ASTRK     &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDER
+&kp LBKT                       &trans    &trans  &trans    &trans      &kp PIPE       &kp QUESTION  &trans       &trans        &trans                &trans                 &kp RBKT
+&kp SLASH                      &trans    &trans  &trans    &trans      &kp LT         &kp GT        &kp KP_PLUS  &kp KP_MINUS  &kp KP_MULTIPLY       &kp KP_DIVIDE          &kp BSLH
+                                                 &trans    &trans      &trans         &trans        &kp SPACE
+                                                           &trans      &trans         &trans
             >;
         };
 
@@ -363,7 +369,7 @@
         compatible = "zmk,conditional-layers";
 
         function {
-            if-layers = <1 2>;
+            if-layers = <2 1>;
             then-layer = <3>;
         };
     };
