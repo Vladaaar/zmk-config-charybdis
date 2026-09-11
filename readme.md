@@ -426,7 +426,7 @@ The scaler uses the formula: `output = (input × multiplier) / divisor`
 | **Faster scroll** | Decrease divisor | `1 10` → `1 5` |
 | **Slower scroll** | Increase divisor | `1 10` → `1 15` |
 
-⚠️ **Important:** Use values ≤ 16 for both multiplier and divisor to avoid overflows.
+**Overflow note:** The scaler uses a signed 16-bit intermediate for `input × multiplier` plus the saved remainder. Keep that intermediate within range and use a nonzero divisor; a divisor of 40 is valid. Scaling does not reduce the rate of sensor events.
 
 ### Reference Documentation
 

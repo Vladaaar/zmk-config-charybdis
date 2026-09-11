@@ -130,9 +130,9 @@ def build_docker_command(build_config, workspace_path):
 
     # Init the west workspace at /workspace, using the copied local manifest repo at /workspace/config.
     west_commands.append('[ -d .west ] || west init -l /workspace/config')
-    # Fetch dependencies only when missing (first run or after --clean).
+    # Apply manifest changes on every build, including existing workspaces.
     west_commands.append('cd /workspace')
-    west_commands.append('if [ ! -d zmk ]; then west update; fi')
+    west_commands.append('west update')
     west_commands.append('west zephyr-export')
 
     # Construct west build command (quote build_dir in case shield name has spaces)
@@ -210,7 +210,7 @@ def copy_firmware_to_output(workspace_path, build_dir, shield_name, board_name):
     # Generate output filename: shield-board.uf2
     # Replace underscores with hyphens for consistency
     shield_clean = shield_name.replace('_', '-')
-    board_clean = board_name.replace('_', '-')
+    board_clean = board_name.replace('_', '-').replace('/', '-')
     output_filename = f"{shield_clean}-{board_clean}.uf2"
     output_file = output_dir / output_filename
 

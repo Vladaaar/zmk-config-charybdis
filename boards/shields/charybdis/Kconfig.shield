@@ -13,5 +13,11 @@ config SHIELD_DONGLE_PROSPECTOR
 config SHIELD_DONGLE_YADS_PROSPECTOR
 	def_bool $(shields_list_contains,dongle_yads_prospector)
 
+config SHIELD_DONGLE_NICE_32
+	def_bool $(shields_list_contains,dongle_nice_32)
+
+config SHIELD_DONGLE_NICE_64
+	def_bool $(shields_list_contains,dongle_nice_64)
+
 config SHIELD_DONGLE_NICE
-	def_bool $(shields_list_contains,dongle_nice)
+	def_bool SHIELD_DONGLE_NICE_32 || SHIELD_DONGLE_NICE_64
