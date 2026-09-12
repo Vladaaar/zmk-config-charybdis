@@ -17,6 +17,8 @@
 		page-offset = <0>;
 		display-offset = <0>;
 		multiplex-ratio = <63>;
+		// This panel uses sequential COM wiring; alternate wiring interleaves rows.
+		com-sequential;
 		prechargep = <0x22>;
 		// vertical mirror
 		com-invdir;

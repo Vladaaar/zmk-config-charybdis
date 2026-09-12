@@ -248,6 +248,7 @@ Two variants are available based on OLED display size:
 
 **128x64 OLED (dongle_nice_64):**
 
+- The panel configuration uses sequential SSD1306 COM wiring (`com-sequential`). This is panel-specific: panels with alternative COM wiring require removing that property. Keep the 64-row geometry when changing COM wiring.
 - **Display**: 128x64 OLED (SSD1306) via I2C (0.96" module)
 - **Active layer name** with center alignment and scrolling support
 - **Peripheral battery levels** (left + right keyboards)
